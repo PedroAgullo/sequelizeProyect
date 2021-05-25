@@ -8,7 +8,6 @@ const router = require('./router.js');
 app.use(express.json());
 app.use(router);
 
-
 //Connecting to the database
 db
 .then(()=>{
