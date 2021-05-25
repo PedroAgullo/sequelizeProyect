@@ -11,9 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Pasajero.belongsTo(models.Nave, {fereingKey: 'naveId'})
     }
+    
   };
   Pasajero.init({
+    naveId: DataTypes.INTEGER,
     nombre: DataTypes.STRING,
     apellido1: DataTypes.STRING,
     apellido2: DataTypes.STRING,
