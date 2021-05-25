@@ -13,8 +13,11 @@ module.exports = {
         references:{
           model: 'Naves',
           key: 'id'
-        }
+        },
+        onUpdadate: 'CASCADE',
+        onDelete:'CASCADE'
       },
+
       nombre: {
         type: Sequelize.STRING
       },
