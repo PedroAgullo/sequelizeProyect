@@ -1,12 +1,15 @@
 const router = require('express').Router();
-const pasajeroController = require('../controllers/pasajero.controller.js');
+const pasajeroController = require('../controllers/pasajero.controller');
+
 
 //API CRUD PASAJERO
 
 router.get('/', async (req, res) => {
     try {
+
         res.json(await pasajeroController.allPassengers());
-    } catch (err) {
+
+    }catch (err) {
         return res.status(500).json({
             message: err.message
         });
@@ -15,10 +18,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const id = req.params.id;
 
+        const id = req.params.id;
         res.json(await pasajeroController.passengerId(id));
-    } catch (err) {
+
+    }catch (err) {
         return res.status(500).json({
             message: err.message
         });
@@ -26,21 +30,42 @@ router.get('/:id', async (req, res) => {
 });
 
 
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     try {
         const body = req.body;
-        const id = await pasajeroController.newPassenger(body);
-    } catch (err) {
+        res.json(await pasajeroController.newPassenger(body));
+
+    }catch (err) {
         return res.status(500).json({
             message: err.message
         });
     }
-})
+});
 
 
-// router.update();
+router.put('/', async (req, res) => {
+    try {
+        const cuerpoDeDatos = req.body;
+        res.json(await pasajeroController.modifyPassenger(cuerpoDeDatos));
+
+    }catch (err) {
+        return res.status(500).json({
+            message: err.message
+        });
+    }
+});
 
 
-// router.delete();
+router.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        res.json(await pasajeroController.deletePassenger(id));
+
+    }catch (err) {
+        return res.status(500).json({
+            message: err.message
+        });
+    }
+});
 
 module.exports = router;
